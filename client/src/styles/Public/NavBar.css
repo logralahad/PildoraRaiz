@@ -1,0 +1,13 @@
+body {
+  background-image: none;
+}
+
+#responsive-navbar-nav .nav-link .chakra-button {
+  color: #fff;
+}
+
+#responsive-navbar-nav .nav-link.active {
+  text-align: center;
+  border-bottom: #00ffff solid;
+  border-bottom-width: 2px;
+}
