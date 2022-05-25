@@ -33,14 +33,16 @@ type props = {
   pacientId: number;
   consultaToEdit: Consultation;
   onCloseEdit: Function;
-  actualizarConsultas: Function;
+  flag: boolean;
+  setFlag: Function;
 };
 
 export function EditConsultation({
   pacientId,
   consultaToEdit,
   onCloseEdit,
-  actualizarConsultas,
+  flag,
+  setFlag,
 }: props) {
   return (
     <>
@@ -64,7 +66,7 @@ export function EditConsultation({
             ConsultasService.updateConsulta(consulta)
               .then(() => {
                 Swal.fire({ title: "Consulta actualizada", icon: "success" });
-                actualizarConsultas(pacientId);
+                setFlag(!flag);
               })
               .catch(() => {
                 Swal.fire({

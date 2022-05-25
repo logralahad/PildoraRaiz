@@ -32,13 +32,15 @@ interface values {
 type props = {
   pacientId: number;
   onCloseCreate: Function;
-  actualizarConsultas: Function;
+  setFlag: Function;
+  flag: boolean;
 };
 
 export function CreateConsultation({
   pacientId,
   onCloseCreate,
-  actualizarConsultas,
+  flag,
+  setFlag,
 }: props) {
   return (
     <>
@@ -61,7 +63,7 @@ export function CreateConsultation({
             ConsultasService.createConsulta(consulta)
               .then(() => {
                 Swal.fire({ title: "Consulta agregada", icon: "success" });
-                actualizarConsultas(pacientId);
+                setFlag(!flag);
               })
               .catch(() => {
                 Swal.fire({

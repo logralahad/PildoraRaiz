@@ -34,7 +34,12 @@ import { CreateConsultation } from "./CrearConsulta";
 import ConsultasService from "../../../../services/ConsultationService";
 import Consultation from "../../../../models/Consultation";
 
-export function ListConsultations() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function ListConsultations({ flag, setFlag }: props) {
   const [consultas, setConsultas] = useState<Consultation[]>([]);
   const [consultaToEdit, setConsultaToEdit] = useState<Consultation>();
   const [actual, setActual] = useState("");
@@ -51,7 +56,9 @@ export function ListConsultations() {
     onClose: onCloseCreate,
   } = useDisclosure();
 
-  useEffect(() => {}, [consultas, idAct]);
+  useEffect(() => {
+    getConsultas(idAct);
+  }, [flag, idAct]);
 
   const getConsultas = (id: number) => {
     ConsultasService.getConsultationsByPacientId(id)
@@ -209,7 +216,8 @@ export function ListConsultations() {
                 pacientId={idAct}
                 consultaToEdit={consultaToEdit!}
                 onCloseEdit={onCloseEdit}
-                actualizarConsultas={getConsultas}
+                flag={flag}
+                setFlag={setFlag}
               />
             </Box>
           </ModalBody>
@@ -226,7 +234,8 @@ export function ListConsultations() {
               <CreateConsultation
                 pacientId={idAct}
                 onCloseCreate={onCloseCreate}
-                actualizarConsultas={getConsultas}
+                flag={flag}
+                setFlag={setFlag}
               />
             </Box>
           </ModalBody>

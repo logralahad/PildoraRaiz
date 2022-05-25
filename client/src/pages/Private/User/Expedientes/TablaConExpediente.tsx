@@ -26,7 +26,12 @@ import Pacient from "../../../../models/Pacient";
 import FileService from "../../../../services/FileService";
 import File from "../../../../models/File";
 
-const PacientsWithFile = () => {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+const PacientsWithFile = ({ flag, setFlag }: props) => {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteActual, setPacienteActual] = useState(-1);
   const [fileActual, setFileActual] = useState<File>();
@@ -52,7 +57,7 @@ const PacientsWithFile = () => {
 
   useEffect(() => {
     actualizarPacientes();
-  }, [pacientes]);
+  }, [flag]);
 
   const handleUpdateClick = (id: number) => {
     FileService.getFileByPacientId(id)
@@ -154,7 +159,8 @@ const PacientsWithFile = () => {
           <ModalBody pb={6} pt={6}>
             <Box p={8} bg={"white"} border={"1px"} borderRadius={"15px"}>
               <EditFile
-                actualizarVista={actualizarPacientes}
+                flag={flag}
+                setFlag={setFlag}
                 pacientId={pacienteActual}
                 onCloseEdit={onCloseEdit}
                 filetoEdit={fileActual!}

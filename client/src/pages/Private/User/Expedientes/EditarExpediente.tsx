@@ -34,14 +34,16 @@ type props = {
   filetoEdit: File;
   pacientId: number;
   onCloseEdit: Function;
-  actualizarVista: Function;
+  flag: boolean;
+  setFlag: Function;
 };
 
 export function EditFile({
   filetoEdit,
   pacientId,
   onCloseEdit,
-  actualizarVista,
+  flag,
+  setFlag,
 }: props) {
   return (
     <>
@@ -69,7 +71,7 @@ export function EditFile({
             FileService.updateFile(exp)
               .then(() => {
                 Swal.fire({ title: "Expediente actualizado", icon: "success" });
-                actualizarVista();
+                setFlag(!flag);
               })
               .catch(() => {
                 Swal.fire({

@@ -36,7 +36,12 @@ interface values {
   descripcion: string;
 }
 
-export function CreateRol() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function CreateRol({ flag, setFlag }: props) {
   const [create, setCreate] = useState(false);
   const [edit, setEdit] = useState(false);
   const [clean, setClean] = useState(false);
@@ -60,6 +65,7 @@ export function CreateRol() {
             RolService.createRol(rol)
               .then(() => {
                 Swal.fire({ title: "Rol agregado", icon: "success" });
+                setFlag(!flag);
               })
               .catch(() => {
                 Swal.fire({

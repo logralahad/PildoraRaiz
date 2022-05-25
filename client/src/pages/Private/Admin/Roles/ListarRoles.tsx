@@ -49,7 +49,12 @@ interface values {
   descripcion: string;
 }
 
-export function ListRoles() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function ListRoles({ flag, setFlag }: props) {
   const [roles, setRoles] = useState<Rol[]>([]);
   const [rolToEdit, setRolToEdit] = useState<Rol>();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -58,7 +63,7 @@ export function ListRoles() {
   const [edit, setEdit] = useState(false);
   const [clean, setClean] = useState(false);
 
-  useEffect(() => {
+  const getRoles = () => {
     RolService.getAllRoles()
       .then((response) => {
         setRoles(response);
@@ -69,7 +74,11 @@ export function ListRoles() {
           title: "Hubo un error al recuperar los roles.",
         });
       });
-  }, [roles]);
+  };
+
+  useEffect(() => {
+    getRoles();
+  }, [flag]);
 
   const handleUpdateClick = (id: number) => {
     const newRolToEdit = roles.find((rol) => rol.id === id);
@@ -93,6 +102,7 @@ export function ListRoles() {
         RolService.deleteRol(id)
           .then(() => {
             Swal.fire({ title: "Rol eliminado", icon: "success" });
+            setFlag(!flag);
           })
           .catch(() => {
             Swal.fire({
@@ -184,6 +194,7 @@ export function ListRoles() {
                         title: "Rol modificado",
                         icon: "success",
                       });
+                      setFlag(!flag);
                       onClose();
                     })
                     .catch(() => {

@@ -36,6 +36,7 @@ export function AdminTablero() {
   const [titulo, setTitulo] = useState("BIENVENIDO DE VUELTA");
   const [subtitulo, setSubtitulo] = useState("");
   const { currentUser, signout } = useContext(AuthContext) as IAuthContext;
+  const [flag, setFlag] = useState(false);
 
   return (
     <>
@@ -85,16 +86,16 @@ export function AdminTablero() {
                   </Flex>
                   <TabPanels pl={10} pr={10}>
                     <TabPanel>
-                      <ListRoles />
+                      <ListRoles flag={flag} setFlag={setFlag} />
                     </TabPanel>
                     <TabPanel>
-                      <CreateRol />
+                      <CreateRol flag={flag} setFlag={setFlag} />
                     </TabPanel>
                     <TabPanel>
-                      <ListUsers />
+                      <ListUsers flag={flag} setFlag={setFlag} />
                     </TabPanel>
                     <TabPanel>
-                      <CreateUser />
+                      <CreateUser flag={flag} setFlag={setFlag} />
                     </TabPanel>
                   </TabPanels>
                 </VStack>
@@ -131,16 +132,16 @@ export function AdminTablero() {
                 </Center>
                 <TabPanels>
                   <TabPanel>
-                    <ListRoles />
+                    <ListRoles flag={flag} setFlag={setFlag} />
                   </TabPanel>
                   <TabPanel>
-                    <CreateRol />
+                    <CreateRol flag={flag} setFlag={setFlag} />
                   </TabPanel>
                   <TabPanel>
-                    <ListUsers />
+                    <ListUsers flag={flag} setFlag={setFlag} />
                   </TabPanel>
                   <TabPanel>
-                    <CreateUser />
+                    <CreateUser flag={flag} setFlag={setFlag} />
                   </TabPanel>
                 </TabPanels>
               </VStack>

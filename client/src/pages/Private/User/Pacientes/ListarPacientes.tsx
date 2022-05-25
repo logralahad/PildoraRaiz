@@ -38,7 +38,12 @@ import Pacient from "../../../../models/Pacient";
 import { AuthContext, IAuthContext } from "../../../../context/useAuth";
 import PacienteService from "../../../../services/PacientService";
 
-export function ListPacients() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function ListPacients({ flag, setFlag }: props) {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteToEdit, setPacienteToEdit] = useState<Pacient>();
 
@@ -58,7 +63,7 @@ export function ListPacients() {
 
   useEffect(() => {
     getPacientes();
-  }, [pacientes]);
+  }, [flag]);
 
   const getPacientes = () => {
     PacienteService.getAllPacientsByUserId(currentUser?.id!)
@@ -193,7 +198,8 @@ export function ListPacients() {
                 userId={currentUser?.id!}
                 pacientToEdit={pacienteToEdit!}
                 onCloseEdit={onCloseEdit}
-                actualizarVista={getPacientes}
+                flag={flag}
+                setFlag={setFlag}
               />
             </Box>
           </ModalBody>
@@ -210,7 +216,8 @@ export function ListPacients() {
               <CreatePacient
                 userId={currentUser?.id!}
                 onCloseCreate={onCloseCreate}
-                actualizarVista={getPacientes}
+                flag={flag}
+                setFlag={setFlag}
               />
             </Box>
           </ModalBody>

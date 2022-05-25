@@ -24,7 +24,12 @@ import { CreateFile } from "./CrearExpediente";
 import Pacient from "../../../../models/Pacient";
 import PacienteService from "../../../../services/PacientService";
 
-const PacientsWithoutFile = () => {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+const PacientsWithoutFile = ({ flag, setFlag }: props) => {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteActual, setPacienteActual] = useState(-1);
 
@@ -49,7 +54,7 @@ const PacientsWithoutFile = () => {
 
   useEffect(() => {
     actualizarPacientes();
-  }, [pacientes]);
+  }, [flag]);
 
   return (
     <>
@@ -106,7 +111,8 @@ const PacientsWithoutFile = () => {
             <Box p={8} bg={"white"} border={"1px"} borderRadius={"15px"}>
               <CreateFile
                 pacientId={pacienteActual}
-                actualizarVista={actualizarPacientes}
+                flag={flag}
+                setFlag={setFlag}
                 onCloseCreate={onCloseCreate}
               />
             </Box>

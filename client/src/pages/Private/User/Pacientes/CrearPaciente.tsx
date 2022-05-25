@@ -47,20 +47,35 @@ interface values {
 type props = {
   userId: number;
   onCloseCreate: Function;
-  actualizarVista: Function;
+  setFlag: Function;
+  flag: boolean;
 };
 
-export function CreatePacient({
-  userId,
-  onCloseCreate,
-  actualizarVista,
-}: props) {
+export function CreatePacient({ userId, onCloseCreate, flag, setFlag }: props) {
   const [image, setImage] = useState("");
   const [file, setFile] = useState<File | undefined>();
 
   const doClickOnInput = () => {
     var input = document.getElementById("subirImagen") as HTMLInputElement;
     input?.click();
+  };
+
+  const savePacient = (pacient: Pacient) => {
+    PacienteService.createPaciente(pacient).then((response) => {
+      if (response.error) {
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un error al agregar al paciente",
+        });
+      } else {
+        Swal.fire({
+          title: "Paciente agregado",
+          icon: "success",
+        });
+        setFlag(!flag);
+        onCloseCreate();
+      }
+    });
   };
 
   return (
@@ -96,37 +111,23 @@ export function CreatePacient({
             pacient.img = values.img ? values.img : "---";
             pacient.userId = userId;
 
+            console.log(pacient);
             if (file) {
               ImagenesService.upload(file)
                 .then((response) => {
                   ImagenesService.get(response.data)
                     .then((url) => {
                       pacient.img = url;
-                      PacienteService.createPaciente(pacient).then(
-                        (response) => {
-                          if (response.error) {
-                            Swal.fire({
-                              icon: "error",
-                              title: "Hubo un error al agregar al paciente",
-                            });
-                          } else {
-                            actions.resetForm();
-                            actualizarVista();
-                            Swal.fire({
-                              title: "Paciente agregado",
-                              icon: "success",
-                            });
-                          }
-                        }
-                      );
-
+                      savePacient(pacient);
                       setImage("");
-                      actions.setSubmitting(false);
                     })
                     .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
+            } else {
+              savePacient(pacient);
             }
+            actions.setSubmitting(false);
           }}
         >
           <Form>

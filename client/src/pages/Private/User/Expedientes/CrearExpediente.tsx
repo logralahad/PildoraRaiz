@@ -33,14 +33,11 @@ interface values {
 type props = {
   pacientId: number;
   onCloseCreate: Function;
-  actualizarVista: Function;
+  flag: boolean;
+  setFlag: Function;
 };
 
-export function CreateFile({
-  pacientId,
-  onCloseCreate,
-  actualizarVista,
-}: props) {
+export function CreateFile({ pacientId, onCloseCreate, flag, setFlag }: props) {
   return (
     <>
       <Box>
@@ -66,7 +63,7 @@ export function CreateFile({
             FileService.createFile(exp)
               .then(() => {
                 Swal.fire({ title: "Expediente creado", icon: "success" });
-                actualizarVista();
+                setFlag(!flag);
               })
               .catch(() => {
                 Swal.fire({

@@ -35,7 +35,12 @@ interface values {
   password: string;
 }
 
-export function CreateUser() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function CreateUser({ flag, setFlag }: props) {
   const [roles, setRoles] = useState<Rol[]>([]);
 
   useEffect(() => {
@@ -49,7 +54,7 @@ export function CreateUser() {
           title: "Hubo un error al recuperar los roles",
         });
       });
-  }, [roles]);
+  }, []);
 
   return (
     <Box border={"1px"} borderRadius="15px" borderStyle={"solid"}>
@@ -92,6 +97,7 @@ export function CreateUser() {
                   "select-roles-user"
                 ) as HTMLSelectElement;
                 selectRoles.selectedIndex = 0;
+                setFlag(!flag);
                 Swal.fire({ title: "Usuario agregado", icon: "success" });
               }
             });

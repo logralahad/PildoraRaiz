@@ -17,7 +17,12 @@ httpClient.interceptors.request.use(
       "Content-Type": "application/json",
     };
 
-    if (token) config.headers.Authorization = token;
+    if (token) {
+      config.headers = {
+        "Content-Type": "application/json",
+        "auth-token": JSON.parse(token),
+      };
+    }
     return config;
   },
   function (error) {
@@ -59,7 +64,12 @@ httpFormDataClient.interceptors.request.use(
       "Content-Type": "multipart/form-data",
     };
 
-    if (token) config.headers.Authentication = token;
+    if (token) {
+      config.headers = {
+        "Content-Type": "multipart/form-data",
+        "auth-token": JSON.parse(token),
+      };
+    }
     return config;
   },
   function (error) {

@@ -22,6 +22,7 @@ import { AuthContext, IAuthContext } from "../../context/useAuth";
 export function UserDash() {
   const [defIndex, setDefIndex] = useState(-1);
   const { currentUser } = useContext(AuthContext) as IAuthContext;
+  const [flag, setFlag] = useState(false);
 
   return (
     <>
@@ -43,13 +44,13 @@ export function UserDash() {
             <Box w={"100%"} pt={4} h={"100vh"}>
               <TabPanels>
                 <TabPanel>
-                  <ListPacients />
+                  <ListPacients flag={flag} setFlag={setFlag} />
                 </TabPanel>
                 <TabPanel>
-                  <ListConsultations />
+                  <ListConsultations flag={flag} setFlag={setFlag} />
                 </TabPanel>
                 <TabPanel>
-                  <ListFiles />
+                  <ListFiles flag={flag} setFlag={setFlag} />
                 </TabPanel>
               </TabPanels>
             </Box>
@@ -63,13 +64,13 @@ export function UserDash() {
             <Box w={"100%"} pt={4} h={"100vh"}>
               <TabPanels>
                 <TabPanel>
-                  <ListPacients />
+                  <ListPacients flag={flag} setFlag={setFlag} />
                 </TabPanel>
                 <TabPanel>
-                  <ListConsultations />
+                  <ListConsultations flag={flag} setFlag={setFlag} />
                 </TabPanel>
                 <TabPanel>
-                  <ListFiles />
+                  <ListFiles flag={flag} setFlag={setFlag} />
                 </TabPanel>
               </TabPanels>
             </Box>

@@ -49,13 +49,31 @@ interface values {
   password: string;
 }
 
-export function ListUsers() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function ListUsers({ flag, setFlag }: props) {
   const [roles, setRoles] = useState<Rol[]>([]);
   const [users, setUsers] = useState<User[]>([]);
   const [userToEdit, setUserToEdit] = useState<User>();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  useEffect(() => {
+  const getRoles = () => {
+    RolService.getAllRoles()
+      .then((response) => {
+        setRoles(response);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un error al recuperar los roles.",
+        });
+      });
+  };
+
+  const getUsers = () => {
     UserService.getAllUsers()
       .then((response) => {
         setUsers(response);
@@ -66,18 +84,12 @@ export function ListUsers() {
           title: "Hubo un error al recuperar los usuarios",
         });
       });
+  };
 
-    RolService.getAllRoles()
-      .then((response) => {
-        setRoles(response);
-      })
-      .catch(() => {
-        Swal.fire({
-          icon: "error",
-          title: "Hubo un error al recuperar los roles",
-        });
-      });
-  }, [users, userToEdit]);
+  useEffect(() => {
+    getUsers();
+    getRoles();
+  }, [flag]);
 
   const handleUpdateClick = (id: number) => {
     setUserToEdit(users.find((user) => user.id === id));
@@ -97,6 +109,7 @@ export function ListUsers() {
         UserService.deleteUser(id)
           .then(() => {
             Swal.fire({ title: "Usuario eliminado", icon: "success" });
+            setFlag(!flag);
           })
           .catch(() => {
             Swal.fire({
@@ -202,6 +215,7 @@ export function ListUsers() {
                         title: "Usuario modificado",
                         icon: "success",
                       });
+                      setFlag(!flag);
                       onClose();
                     })
                     .catch(() => {

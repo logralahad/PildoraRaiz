@@ -48,14 +48,16 @@ type props = {
   userId: number;
   pacientToEdit: Pacient;
   onCloseEdit: Function;
-  actualizarVista: Function;
+  setFlag: Function;
+  flag: boolean;
 };
 
 export function EditPacient({
   userId,
   pacientToEdit,
   onCloseEdit,
-  actualizarVista,
+  flag,
+  setFlag,
 }: props) {
   const [image, setImage] = useState(pacientToEdit.img!);
   const [file, setFile] = useState<File | undefined>();
@@ -63,6 +65,24 @@ export function EditPacient({
   const doClickOnInput = () => {
     var input = document.getElementById("cambiarImagen") as HTMLInputElement;
     input?.click();
+  };
+
+  const savePacient = (pacient: Pacient) => {
+    PacienteService.updatePaciente(pacient).then((response) => {
+      if (response.error) {
+        Swal.fire({
+          icon: "error",
+          title: "Hubo un error al guardar al paciente",
+        });
+      } else {
+        Swal.fire({
+          title: "Paciente actualizado",
+          icon: "success",
+        });
+        setFlag(!flag);
+        onCloseEdit();
+      }
+    });
   };
 
   return (
@@ -105,29 +125,15 @@ export function EditPacient({
                   ImagenesService.get(response.data)
                     .then((url) => {
                       pacient.img = url;
-                      PacienteService.updatePaciente(pacient).then(
-                        (response) => {
-                          if (response.error) {
-                            Swal.fire({
-                              icon: "error",
-                              title: "Hubo un error al agregar al paciente",
-                            });
-                          } else {
-                            Swal.fire({
-                              title: "Paciente actualizado",
-                              icon: "success",
-                            });
-                            actualizarVista();
-                            onCloseEdit();
-                          }
-                        }
-                      );
-                      actions.setSubmitting(false);
+                      savePacient(pacient);
                     })
                     .catch((error) => console.log(error));
                 })
                 .catch((error) => console.log(error));
+            } else {
+              savePacient(pacient);
             }
+            actions.setSubmitting(false);
           }}
         >
           <Form>

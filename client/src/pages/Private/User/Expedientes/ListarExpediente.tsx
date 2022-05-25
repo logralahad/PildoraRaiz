@@ -12,7 +12,12 @@ import {
 import PacientsWithFile from "./TablaConExpediente";
 import PacientsWithoutFile from "./TablaSinExpediente";
 
-export function ListFiles() {
+type props = {
+  flag: boolean;
+  setFlag: Function;
+};
+
+export function ListFiles({ flag, setFlag }: props) {
   const [hasFile, setHasFile] = useState(false);
 
   const onSwitchChange = (value: boolean) => {
@@ -59,7 +64,11 @@ export function ListFiles() {
         </Box>
       </Flex>
 
-      {hasFile ? <PacientsWithFile /> : <PacientsWithoutFile />}
+      {hasFile ? (
+        <PacientsWithFile flag={flag} setFlag={setFlag} />
+      ) : (
+        <PacientsWithoutFile flag={flag} setFlag={setFlag} />
+      )}
     </>
   );
 }
