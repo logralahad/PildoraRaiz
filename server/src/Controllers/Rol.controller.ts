@@ -62,12 +62,18 @@ export const updateRol = async (req: Request, res: Response) => {
 
 export const deleteRol = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const result = await Roles.delete({
-    id: Number(id),
-  });
-  return res.send(
-    result.affected === 1 ? "Rol eliminado" : "Hubo un error al eliminar el Rol"
-  );
+  try {
+    const result = await Roles.delete({
+      id: Number(id),
+    });
+    return res.send(
+      result.affected === 1
+        ? "Rol eliminado"
+        : "Hubo un error al eliminar el Rol"
+    );
+  } catch (error) {
+    return res.json({ error: "Hubo un error al eliminar el Rol." });
+  }
 };
 
 export const deleteAllRoles = async (req: Request, res: Response) => {

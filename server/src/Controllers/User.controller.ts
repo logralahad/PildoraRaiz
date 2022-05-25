@@ -163,20 +163,24 @@ export const deleteUser = async (req: Request, res: Response) => {
   });
 
   if (userFound) {
-    const result = await Usuarios.delete({
-      id: Number(id),
-    });
+    try {
+      const result = await Usuarios.delete({
+        id: Number(id),
+      });
 
-    const resultTwo = await Persons.delete({
-      id: userFound.personaId,
-    });
+      const resultTwo = await Persons.delete({
+        id: userFound.personaId,
+      });
 
-    return res.send(
-      resultTwo.affected === 1
-        ? "Usuario eliminado"
-        : "Hubo un error al eliminar al Usuario"
-    );
+      return res.send(
+        resultTwo.affected === 1
+          ? "Usuario eliminado"
+          : "Hubo un error al eliminar al Usuario"
+      );
+    } catch (error) {
+      return res.send({ error: "Hubo un error al eliminar al Usuario" });
+    }
   }
 
-  return res.send({ error: "Hubo un error al eliminar al Paciente" });
+  return res.send({ error: "Hubo un error al eliminar al Usuario" });
 };
