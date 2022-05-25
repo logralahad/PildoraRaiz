@@ -54,7 +54,7 @@ export function CreateUser({ flag, setFlag }: props) {
           title: "Hubo un error al recuperar los roles",
         });
       });
-  }, []);
+  }, [flag]);
 
   return (
     <Box border={"1px"} borderRadius="15px" borderStyle={"solid"}>

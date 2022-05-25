@@ -70,7 +70,7 @@ export function CreateRol({ flag, setFlag }: props) {
               .catch(() => {
                 Swal.fire({
                   icon: "error",
-                  title: "Hubo un error al agregar al usuario",
+                  title: "Hubo un error al agregar el rol",
                 });
               });
             actions.setSubmitting(false);

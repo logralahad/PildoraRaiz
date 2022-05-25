@@ -74,7 +74,7 @@ export function Us() {
                               <Avatar
                                 size="2xl"
                                 name="Dan Abrahmov"
-                                src="https://bit.ly/dan-abramov"
+                                src="https://cdn-icons-png.flaticon.com/512/4305/4305692.png"
                               />
                             </WrapItem>
                           </Wrap>
@@ -140,7 +140,7 @@ export function Us() {
                               <Avatar
                                 size="2xl"
                                 name="Dan Abrahmov"
-                                src="https://bit.ly/dan-abramov"
+                                src="https://cdn-icons-png.flaticon.com/512/4305/4305692.png"
                               />
                             </WrapItem>
                           </Wrap>

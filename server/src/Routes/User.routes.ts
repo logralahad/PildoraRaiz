@@ -21,7 +21,7 @@ router.get(prefix + "/getById/:id", verifyToken, getUserById);
 
 router.get(prefix + "/getByRol/:rol", verifyToken, getUserByRol);
 
-router.get(prefix, verifyToken, getAllUsers);
+router.get(prefix, getAllUsers);
 
 router.put(prefix + "/:id", verifyToken, updateUser);
 
