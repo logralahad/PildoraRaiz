@@ -5,7 +5,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Usuarios } from "./User";
+import { Usuarios } from "./User.js";
 
 @Entity()
 export class Persons extends BaseEntity {

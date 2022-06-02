@@ -9,12 +9,12 @@ import {
   __dbUser__,
   __isProd__,
 } from "./constants";
-import { Persons } from "./Entities/Person";
-import { Pacients } from "./Entities/Pacient";
-import { Consultations } from "./Entities/Consultation";
-import { Roles } from "./Entities/Rol";
-import { Usuarios } from "./Entities/User";
-import { Files } from "./Entities/File";
+import { Persons } from "./Entities/Person.js";
+import { Pacients } from "./Entities/Pacient.js";
+import { Consultations } from "./Entities/Consultation.js";
+import { Roles } from "./Entities/Rol.js";
+import { Usuarios } from "./Entities/User.js";
+import { Files } from "./Entities/File.js";
 
 export const dataSource = new DataSource({
   type: "postgres",

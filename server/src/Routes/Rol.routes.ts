@@ -6,7 +6,7 @@ import {
   getAllRoles,
   getRolById,
   updateRol,
-} from "../Controllers/Rol.controller";
+} from "../Controllers/Rol.controller.js";
 const verifyToken = require("../Middleware/verifyToken");
 
 const router = Router();

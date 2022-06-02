@@ -4,7 +4,7 @@ import {
   __s3Region__,
   __s3Secret__,
   __s3Bucket__,
-} from "../constants";
+} from "../constants.js";
 
 const S3 = require("aws-sdk/clients/s3");
 const crypto = require("crypto");

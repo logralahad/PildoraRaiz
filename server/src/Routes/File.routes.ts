@@ -6,7 +6,7 @@ import {
   getFileById,
   getFileByPacientId,
   updateFile,
-} from "../Controllers/File.controller";
+} from "../Controllers/File.controller.js";
 
 const router = Router();
 const prefix = "/historial";

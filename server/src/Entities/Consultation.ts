@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Pacients } from "./Pacient";
+import { Pacients } from "./Pacient.js";
 
 @Entity()
 export class Consultations extends BaseEntity {

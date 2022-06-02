@@ -3,15 +3,15 @@ import morgan from "morgan";
 import cors from "cors";
 import bodyParser from "body-parser";
 
-import userRoutes from "./Routes/User.routes";
-import rolRoutes from "./Routes/Rol.routes";
-import pacientRoutes from "./Routes/Pacient.routes";
-import fileRoutes from "./Routes/File.routes";
-import consultationRoutes from "./Routes/Consultation.routes";
-import imagesRoutes from "./Routes/Images.routes";
+import userRoutes from "./Routes/User.routes.js";
+import rolRoutes from "./Routes/Rol.routes.js";
+import pacientRoutes from "./Routes/Pacient.routes.js";
+import fileRoutes from "./Routes/File.routes.js";
+import consultationRoutes from "./Routes/Consultation.routes.js";
+import imagesRoutes from "./Routes/Images.routes.js";
 
-import { connectDB } from "./db.config";
-import { __apiPort__, __clientURL__, __isProd__ } from "./constants";
+import { connectDB } from "./db.config.js";
+import { __apiPort__, __clientURL__, __isProd__ } from "./constants.js";
 
 const main = async () => {
   await connectDB();

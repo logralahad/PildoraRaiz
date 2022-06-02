@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
 
-import { Persons } from "../Entities/Person";
-import { Usuarios } from "../Entities/User";
+import { Persons } from "../Entities/Person.js";
+import { Usuarios } from "../Entities/User.js";
 
 import * as argon2 from "argon2";
-import { dataSource } from "../db.config";
-import { __token__ } from "../constants";
+import { dataSource } from "../db.config.js";
+import { __token__ } from "../constants.js";
 
 const jwt = require("jsonwebtoken");
 const repo = dataSource.getRepository(Usuarios);

@@ -7,7 +7,7 @@ import {
   getUserByRol,
   login,
   updateUser,
-} from "../Controllers/User.controller";
+} from "../Controllers/User.controller.js";
 const verifyToken = require("../Middleware/verifyToken");
 
 const router = Router();
