@@ -1,0 +1,15 @@
+import { Router } from "express";
+import { createPacient, deletePacient, getAllPacients, getAllPacientsByUserId, getPacientById, getWithFiles, getWithoutFiles, updatePacient, } from "../Controllers/Pacient.controller";
+const router = Router();
+const prefix = "/pacientes";
+const verifyToken = require("../Middleware/verifyToken");
+router.post(prefix, verifyToken, createPacient);
+router.get(prefix, verifyToken, getAllPacients);
+router.get(prefix + "/getById/:id", verifyToken, getPacientById);
+router.get(prefix + "/getByUser/:userId", verifyToken, getAllPacientsByUserId);
+router.get(prefix + "/WithFiles", verifyToken, getWithFiles);
+router.get(prefix + "/WithoutFiles", verifyToken, getWithoutFiles);
+router.put(prefix + "/:id", updatePacient);
+router.delete(prefix + "/:id", deletePacient);
+export default router;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGFjaWVudC5yb3V0ZXMuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvUm91dGVzL1BhY2llbnQucm91dGVzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sRUFBRSxNQUFNLEVBQUUsTUFBTSxTQUFTLENBQUM7QUFDakMsT0FBTyxFQUNMLGFBQWEsRUFDYixhQUFhLEVBQ2IsY0FBYyxFQUNkLHNCQUFzQixFQUN0QixjQUFjLEVBQ2QsWUFBWSxFQUNaLGVBQWUsRUFDZixhQUFhLEdBQ2QsTUFBTSxtQ0FBbUMsQ0FBQztBQUUzQyxNQUFNLE1BQU0sR0FBRyxNQUFNLEVBQUUsQ0FBQztBQUN4QixNQUFNLE1BQU0sR0FBRyxZQUFZLENBQUM7QUFDNUIsTUFBTSxXQUFXLEdBQUcsT0FBTyxDQUFDLDJCQUEyQixDQUFDLENBQUM7QUFFekQsTUFBTSxDQUFDLElBQUksQ0FBQyxNQUFNLEVBQUUsV0FBVyxFQUFFLGFBQWEsQ0FBQyxDQUFDO0FBRWhELE1BQU0sQ0FBQyxHQUFHLENBQUMsTUFBTSxFQUFFLFdBQVcsRUFBRSxjQUFjLENBQUMsQ0FBQztBQUVoRCxNQUFNLENBQUMsR0FBRyxDQUFDLE1BQU0sR0FBRyxjQUFjLEVBQUUsV0FBVyxFQUFFLGNBQWMsQ0FBQyxDQUFDO0FBRWpFLE1BQU0sQ0FBQyxHQUFHLENBQUMsTUFBTSxHQUFHLG9CQUFvQixFQUFFLFdBQVcsRUFBRSxzQkFBc0IsQ0FBQyxDQUFDO0FBRS9FLE1BQU0sQ0FBQyxHQUFHLENBQUMsTUFBTSxHQUFHLFlBQVksRUFBRSxXQUFXLEVBQUUsWUFBWSxDQUFDLENBQUM7QUFFN0QsTUFBTSxDQUFDLEdBQUcsQ0FBQyxNQUFNLEdBQUcsZUFBZSxFQUFFLFdBQVcsRUFBRSxlQUFlLENBQUMsQ0FBQztBQUVuRSxNQUFNLENBQUMsR0FBRyxDQUFDLE1BQU0sR0FBRyxNQUFNLEVBQUUsYUFBYSxDQUFDLENBQUM7QUFFM0MsTUFBTSxDQUFDLE1BQU0sQ0FBQyxNQUFNLEdBQUcsTUFBTSxFQUFFLGFBQWEsQ0FBQyxDQUFDO0FBRTlDLGVBQWUsTUFBTSxDQUFDIn0=
