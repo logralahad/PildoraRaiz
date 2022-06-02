@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 import {
@@ -25,6 +25,8 @@ import PacienteService from "../../../../services/PacientService";
 import Pacient from "../../../../models/Pacient";
 import FileService from "../../../../services/FileService";
 import File from "../../../../models/File";
+import { AuthContext, IAuthContext } from "../../../../context/useAuth";
+import { isPermitted } from "../../../../validations/validations";
 
 type props = {
   flag: boolean;
@@ -35,6 +37,7 @@ const PacientsWithFile = ({ flag, setFlag }: props) => {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteActual, setPacienteActual] = useState(-1);
   const [fileActual, setFileActual] = useState<File>();
+  const { currentUser } = useContext(AuthContext) as IAuthContext;
 
   const {
     isOpen: isEditOpen,
@@ -60,6 +63,7 @@ const PacientsWithFile = ({ flag, setFlag }: props) => {
   }, [flag]);
 
   const handleUpdateClick = (id: number) => {
+    if (isPermitted(currentUser?.rol?.canEdit!)) return;
     FileService.getFileByPacientId(id)
       .then((response) => {
         setFileActual(response);
@@ -70,6 +74,7 @@ const PacientsWithFile = ({ flag, setFlag }: props) => {
   };
 
   const handleDeleteClick = (id: number) => {
+    if (isPermitted(currentUser?.rol?.canDelete!)) return;
     Swal.fire({
       title: "¿Está seguro que desea eliminarlo?",
       icon: "warning",

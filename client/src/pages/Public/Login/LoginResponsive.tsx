@@ -42,16 +42,7 @@ export function LoginResponsive() {
 
   const navigate = useNavigate();
 
-  if (currentUser)
-    return (
-      <Navigate
-        to={
-          currentUser.rolId === Number(process.env.REACT_APP_ADMIN_ROL)
-            ? "/admin"
-            : "/tablero"
-        }
-      />
-    );
+  if (currentUser) return <Navigate to="/" />;
 
   return (
     <Box
@@ -90,10 +81,7 @@ export function LoginResponsive() {
                   });
                 } else {
                   signin(userSignIn);
-                  response.userFound.rolId ===
-                  Number(process.env.REACT_APP_ADMIN_ROL)
-                    ? navigate("/admin")
-                    : navigate("/tablero");
+                  navigate("/");
                 }
               })
               .catch((error) => {

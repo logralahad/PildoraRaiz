@@ -65,16 +65,7 @@ export function Login() {
     };
   }, []);
 
-  if (currentUser)
-    return (
-      <Navigate
-        to={
-          currentUser.rolId === Number(process.env.REACT_APP_ADMIN_ROL)
-            ? "/admin"
-            : "/tablero"
-        }
-      />
-    );
+  if (currentUser) return <Navigate to="/" />;
 
   return (
     <>
@@ -125,10 +116,7 @@ export function Login() {
                             });
                           } else {
                             signin(userSignIn);
-                            response.userFound.rolId ===
-                            Number(process.env.REACT_APP_ADMIN_ROL)
-                              ? navigate("/admin")
-                              : navigate("/tablero");
+                            navigate("/");
                           }
                         })
                         .catch((error) => {

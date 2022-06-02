@@ -1,3 +1,5 @@
+import Swal from "sweetalert2";
+
 export const validateEmail = (value: string) => {
   let error;
   if (!value) {
@@ -34,4 +36,13 @@ export const isValidNumber = (value: number) => {
     error = "Número invalido";
   }
   return error;
+};
+
+export const isPermitted = (permission: boolean) => {
+  if (permission) return false;
+  Swal.fire({
+    icon: "error",
+    title: "No tiene los permisos necesarios.",
+  });
+  return true;
 };

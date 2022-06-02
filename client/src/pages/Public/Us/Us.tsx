@@ -28,7 +28,7 @@ export function Us() {
       .catch((error) => {
         console.log(error);
       });
-  }, [users]);
+  }, []);
 
   return (
     <>
@@ -50,7 +50,7 @@ export function Us() {
               </Heading>
             </Center>
           </Box>
-          <Box w={"100%"}>
+          <Box w={"140%"}>
             <Grid
               templateRows="repeat(2, 1fr)"
               templateColumns="repeat(3, 1fr)"
@@ -64,9 +64,10 @@ export function Us() {
                     <GridItem key={miembro.id} w="100%">
                       <Box
                         borderRadius={"15px"}
-                        border={"1px"}
+                        borderColor={"cyan"}
+                        border={"2px"}
                         p={6}
-                        bg={"aqua"}
+                        bg={"white"}
                       >
                         <Center>
                           <Wrap>
@@ -126,13 +127,14 @@ export function Us() {
                     <GridItem
                       key={miembro.id}
                       colSpan={index === users.length - 1 ? 2 : 1}
-                      bg={"#"}
+                      bg={"white"}
                     >
                       <Box
                         borderRadius={"15px"}
-                        border={"1px"}
+                        borderColor={"cyan"}
+                        border={"2px"}
                         p={6}
-                        bg={"aqua"}
+                        bg={"white"}
                       >
                         <Center>
                           <Wrap>

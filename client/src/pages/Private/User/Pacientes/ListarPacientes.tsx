@@ -33,7 +33,7 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 import { EditPacient } from "./EditarPaciente";
 import { CreatePacient } from "./CrearPaciente";
-import { isNumeric } from "../../../../validations/validations";
+import { isNumeric, isPermitted } from "../../../../validations/validations";
 import Pacient from "../../../../models/Pacient";
 import { AuthContext, IAuthContext } from "../../../../context/useAuth";
 import PacienteService from "../../../../services/PacientService";
@@ -46,7 +46,6 @@ type props = {
 export function ListPacients({ flag, setFlag }: props) {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteToEdit, setPacienteToEdit] = useState<Pacient>();
-
   const { currentUser } = useContext(AuthContext) as IAuthContext;
 
   const {
@@ -79,6 +78,7 @@ export function ListPacients({ flag, setFlag }: props) {
   };
 
   const handleUpdateClick = (id: number) => {
+    if (isPermitted(currentUser?.rol?.canEdit!)) return;
     PacienteService.getPacientById(id)
       .then((response) => {
         setPacienteToEdit(response);
@@ -88,6 +88,7 @@ export function ListPacients({ flag, setFlag }: props) {
   };
 
   const handleDeleteClick = (id: number) => {
+    if (isPermitted(currentUser?.rol?.canDelete!)) return;
     Swal.fire({
       title: "¿Está seguro que desea eliminarlo?",
       icon: "warning",
@@ -130,7 +131,10 @@ export function ListPacients({ flag, setFlag }: props) {
             bg={"#38C8B0"}
             color={"white"}
             borderRadius={"15px"}
-            onClick={onOpenCreate}
+            onClick={() => {
+              if (isPermitted(currentUser?.rol?.canCreate!)) return;
+              onOpenCreate();
+            }}
           >
             <Text fontSize="md" noOfLines={2}>
               REGISTRAR PACIENTE

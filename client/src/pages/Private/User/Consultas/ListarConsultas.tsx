@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 import {
@@ -33,6 +33,8 @@ import { EditConsultation } from "./EditarConsulta";
 import { CreateConsultation } from "./CrearConsulta";
 import ConsultasService from "../../../../services/ConsultationService";
 import Consultation from "../../../../models/Consultation";
+import { AuthContext, IAuthContext } from "../../../../context/useAuth";
+import { isPermitted } from "../../../../validations/validations";
 
 type props = {
   flag: boolean;
@@ -44,6 +46,8 @@ export function ListConsultations({ flag, setFlag }: props) {
   const [consultaToEdit, setConsultaToEdit] = useState<Consultation>();
   const [actual, setActual] = useState("");
   const [idAct, setIdAct] = useState(-1);
+  const { currentUser } = useContext(AuthContext) as IAuthContext;
+
   const {
     isOpen: isEditOpen,
     onOpen: onOpenEdit,
@@ -75,7 +79,12 @@ export function ListConsultations({ flag, setFlag }: props) {
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     var identifier = event.target.value;
-    let id = Number(identifier);
+    let id;
+    if (identifier === "") {
+      id = -1;
+    } else {
+      id = Number(identifier);
+    }
     getConsultas(id);
     setIdAct(id);
     setActual(identifier);
@@ -86,6 +95,7 @@ export function ListConsultations({ flag, setFlag }: props) {
   };
 
   const handleDeleteClick = (id: number) => {
+    if (isPermitted(currentUser?.rol?.canDelete!)) return;
     Swal.fire({
       title: "¿Está seguro que desea eliminarlo?",
       icon: "warning",
@@ -141,6 +151,7 @@ export function ListConsultations({ flag, setFlag }: props) {
             color={"white"}
             borderRadius={"15px"}
             onClick={() => {
+              if (isPermitted(currentUser?.rol?.canCreate!)) return;
               idAct != -1
                 ? onOpenCreate()
                 : Swal.fire({
@@ -181,6 +192,7 @@ export function ListConsultations({ flag, setFlag }: props) {
                         w={"100%"}
                         colorScheme={"purple"}
                         onClick={() => {
+                          if (isPermitted(currentUser?.rol?.canEdit!)) return;
                           handleUpdateClick(consulta.id!);
                           onOpenEdit();
                         }}

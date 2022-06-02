@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
 import {
@@ -23,6 +23,8 @@ import {
 import { CreateFile } from "./CrearExpediente";
 import Pacient from "../../../../models/Pacient";
 import PacienteService from "../../../../services/PacientService";
+import { AuthContext, IAuthContext } from "../../../../context/useAuth";
+import { isPermitted } from "../../../../validations/validations";
 
 type props = {
   flag: boolean;
@@ -32,6 +34,7 @@ type props = {
 const PacientsWithoutFile = ({ flag, setFlag }: props) => {
   const [pacientes, setPacientes] = useState<Pacient[]>([]);
   const [pacienteActual, setPacienteActual] = useState(-1);
+  const { currentUser } = useContext(AuthContext) as IAuthContext;
 
   const {
     isOpen: isCreateOpen,
@@ -88,6 +91,7 @@ const PacientsWithoutFile = ({ flag, setFlag }: props) => {
                         bg={"#38C8B0"}
                         color={"white"}
                         onClick={() => {
+                          if (isPermitted(currentUser?.rol?.canCreate!)) return;
                           setPacienteActual(paciente.id!);
                           onOpenCreate();
                         }}
