@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Roles } from "../Entities/Rol.js";
+import { Roles } from "../Entities/Rol";
 
 export const createRol = async (req: Request, res: Response) => {
   const { nombre, descripcion, canCreate, canEdit, canDelete } = req.body;

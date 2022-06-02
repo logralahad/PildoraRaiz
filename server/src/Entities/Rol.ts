@@ -6,7 +6,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Usuarios } from "./User.js";
+import { Usuarios } from "./User";
 
 @Entity()
 export class Roles extends BaseEntity {

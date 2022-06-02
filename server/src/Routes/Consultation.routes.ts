@@ -6,7 +6,7 @@ import {
   getConsultationById,
   getConsultationsByPacientId,
   updateConsultation,
-} from "../Controllers/Consultation.controller.js";
+} from "../Controllers/Consultation.controller";
 
 const router = Router();
 const prefix = "/consultas";

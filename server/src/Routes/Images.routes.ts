@@ -3,7 +3,7 @@ import {
   deleteImage,
   getImage,
   uploadImage,
-} from "../Controllers/Images.controller.js";
+} from "../Controllers/Images.controller";
 
 const router = Router();
 const prefix = "/imagenes";

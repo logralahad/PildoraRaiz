@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 import { In } from "typeorm";
-import { dataSource } from "../db.config.js";
-import { Consultations } from "../Entities/Consultation.js";
-import { Pacients } from "../Entities/Pacient.js";
+import { dataSource } from "../db.config";
+import { Consultations } from "../Entities/Consultation";
+import { Pacients } from "../Entities/Pacient";
 
 const repo = dataSource.getRepository(Consultations);
 

@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { Files } from "../Entities/File.js";
-import { Pacients } from "../Entities/Pacient.js";
+import { Files } from "../Entities/File";
+import { Pacients } from "../Entities/Pacient";
 
 export const createFile = async (req: Request, res: Response) => {
   const {

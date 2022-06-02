@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
-import { dataSource } from "../db.config.js";
-import { Pacients } from "../Entities/Pacient.js";
-import { Persons } from "../Entities/Person.js";
+import { dataSource } from "../db.config";
+import { Pacients } from "../Entities/Pacient";
+import { Persons } from "../Entities/Person";
 
 const repo = dataSource.getRepository(Pacients);
 

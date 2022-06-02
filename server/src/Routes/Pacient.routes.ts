@@ -8,7 +8,7 @@ import {
   getWithFiles,
   getWithoutFiles,
   updatePacient,
-} from "../Controllers/Pacient.controller.js";
+} from "../Controllers/Pacient.controller";
 
 const router = Router();
 const prefix = "/pacientes";

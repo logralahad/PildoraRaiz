@@ -8,9 +8,9 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Consultations } from "./Consultation.js";
-import { Persons } from "./Person.js";
-import { Usuarios } from "./User.js";
+import { Consultations } from "./Consultation";
+import { Persons } from "./Person";
+import { Usuarios } from "./User";
 
 @Entity()
 export class Pacients extends BaseEntity {
