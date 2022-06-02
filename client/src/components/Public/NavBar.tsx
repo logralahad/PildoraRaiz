@@ -69,7 +69,7 @@ export function NavBar() {
               <Button
                 as={Link}
                 to={
-                  currentUser.rolId! === Number(process.env.REACT_APP_ADMIN_ROL)
+                  currentUser.rol?.descripcion === "Administrador"
                     ? "admin"
                     : "tablero"
                 }
@@ -79,8 +79,7 @@ export function NavBar() {
                 <Nav.Link
                   as={Link}
                   to={
-                    currentUser.rolId! ===
-                    Number(process.env.REACT_APP_ADMIN_ROL)
+                    currentUser.rol?.descripcion === "Administrador"
                       ? "admin"
                       : "tablero"
                   }

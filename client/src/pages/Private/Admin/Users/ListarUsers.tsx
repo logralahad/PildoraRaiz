@@ -139,8 +139,7 @@ export function ListUsers({ flag, setFlag }: props) {
           <Tbody>
             {users.length > 0 &&
               users.map((user) => {
-                return user.rolId ===
-                  Number(process.env.REACT_APP_ADMIN_ROL) ? (
+                return user.rol?.descripcion === "Administrador" ? (
                   <></>
                 ) : (
                   <Tr key={user.id} id={"fila-user-" + user.id}>

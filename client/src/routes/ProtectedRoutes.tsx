@@ -12,16 +12,10 @@ export const ProtectedRoute = ({ isAdmin }: isAdminProps) => {
   const location = useLocation();
 
   if (currentUser) {
-    if (
-      isAdmin &&
-      currentUser.rolId !== Number(process.env.REACT_APP_ADMIN_ROL)
-    ) {
+    if (isAdmin && currentUser.rol?.descripcion !== "Administrador") {
       return <Navigate to="/" state={{ from: location.pathname }} replace />;
     }
-    if (
-      !isAdmin &&
-      currentUser.rolId === Number(process.env.REACT_APP_ADMIN_ROL)
-    ) {
+    if (!isAdmin && currentUser.rol?.descripcion === "Administrador") {
       return <Navigate to="/" state={{ from: location.pathname }} replace />;
     }
     return <Outlet></Outlet>;
