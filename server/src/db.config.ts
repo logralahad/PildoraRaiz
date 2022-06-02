@@ -13,9 +13,11 @@ import {
 import { Persons } from "./Entities/Person";
 import { Pacients } from "./Entities/Pacient";
 import { Consultations } from "./Entities/Consultation";
-import { Roles } from "./Entities/Rol.js";
+import { Roles } from "./Entities/Rol";
 import { Usuarios } from "./Entities/User";
 import { Files } from "./Entities/File";
+
+const jwt = require("jsonwebtoken");
 
 export const dataSource = new DataSource({
   type: "postgres",
