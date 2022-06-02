@@ -69,7 +69,7 @@ export function NavBar() {
               <Button
                 as={Link}
                 to={
-                  currentUser.rol?.descripcion === "Administrador"
+                  currentUser.rol?.nombre === "Administrador"
                     ? "admin"
                     : "tablero"
                 }
@@ -79,7 +79,7 @@ export function NavBar() {
                 <Nav.Link
                   as={Link}
                   to={
-                    currentUser.rol?.descripcion === "Administrador"
+                    currentUser.rol?.nombre === "Administrador"
                       ? "admin"
                       : "tablero"
                   }

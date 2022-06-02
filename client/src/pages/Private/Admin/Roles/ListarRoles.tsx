@@ -132,7 +132,7 @@ export function ListRoles({ flag, setFlag }: props) {
           <Tbody>
             {roles.length > 0 &&
               roles.map((rol) => {
-                return rol.descripcion === "Administrador" ? (
+                return rol.nombre === "Administrador" ? (
                   <></>
                 ) : (
                   <Tr key={rol.id} id={"fila-rol-" + rol.id}>

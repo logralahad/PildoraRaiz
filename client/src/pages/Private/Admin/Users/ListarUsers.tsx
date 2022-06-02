@@ -139,7 +139,7 @@ export function ListUsers({ flag, setFlag }: props) {
           <Tbody>
             {users.length > 0 &&
               users.map((user) => {
-                return user.rol?.descripcion === "Administrador" ? (
+                return user.rol?.nombre === "Administrador" ? (
                   <></>
                 ) : (
                   <Tr key={user.id} id={"fila-user-" + user.id}>
