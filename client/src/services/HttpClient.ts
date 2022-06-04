@@ -4,7 +4,7 @@ import SecureLS from "secure-ls";
 const ls = new SecureLS({ encodingType: "aes" });
 
 const httpClient = axios.create({
-  baseURL: "https://root-pill-api.herokuapp.com/",
+  baseURL: process.env.REACT_APP_API,
   headers: {
     "Content-Type": "application/json",
   },
@@ -51,7 +51,7 @@ httpClient.interceptors.response.use(
 );
 
 const httpFormDataClient = axios.create({
-  baseURL: "https://root-pill-api.herokuapp.com/",
+  baseURL: process.env.REACT_APP_API,
   headers: {
     "Content-Type": "multipart/form-data",
   },

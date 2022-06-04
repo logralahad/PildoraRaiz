@@ -1,6 +1,0 @@
-{
-  "scripts": {
-    "start": "node server/dist/index.js",
-    "deploy": "git add . && git commit -m Heroku && git push heroku main"
-  }
-}
